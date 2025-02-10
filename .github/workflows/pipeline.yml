@@ -22,6 +22,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       # deploy vpc
       - name: deploy vpc
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
         with: 
           name: ${{ env.APP_NAME }}
           template: vpc.yml
