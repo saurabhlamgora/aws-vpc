@@ -1,0 +1,31 @@
+name: AWS example workflow
+on:
+  push
+env:
+  AWS_REGION : "us-east-1"
+  APP_NAME: "app1"
+  ENVIRONMENT: "prod"
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout from master
+        uses: actions/checkout@v4
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.IAM_ROLE }}
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}
+      # deploy vpc
+      - name: deploy vpc
+        with: 
+          name: ${{ env.APP_NAME }}
+          template: vpc.yml
+          working-directory: code
+          parameter-overrides: AppName=${{ env.APP_NAME }, Environment=${{ env.ENVIRONMENT}}
+
+
