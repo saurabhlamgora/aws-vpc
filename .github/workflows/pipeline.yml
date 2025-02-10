@@ -25,8 +25,7 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with: 
           name: ${{ env.APP_NAME }}
-          template: vpc.yml
-          working-directory: code
+          template: ./vpc.yml
           parameter-overrides: AppName=${{ env.APP_NAME }}, Environment=${{ env.ENVIRONMENT}}
 
 
