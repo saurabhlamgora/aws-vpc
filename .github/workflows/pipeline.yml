@@ -27,6 +27,6 @@ jobs:
           name: ${{ env.APP_NAME }}
           template: vpc.yml
           working-directory: code
-          parameter-overrides: AppName=${{ env.APP_NAME }, Environment=${{ env.ENVIRONMENT}}
+          parameter-overrides: AppName=${{ env.APP_NAME }}, Environment=${{ env.ENVIRONMENT}}
 
 
